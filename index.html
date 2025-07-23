@@ -5,105 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SuDhama Farm – Taste the Tradition of Udupi</title>
     <meta name="description" content="SuDhama Farm brings the fresh, pure goodness of rural Udupi dairy to your table. Discover our farm, products, and heritage.">
+    
+    <!-- Favicon - A simplified version of the logo -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐄</text></svg>">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Google Fonts: Nunito & Roboto Slab -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    
     <style>
+        /* Custom styles for the page */
         body {
             font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #f9fafb 0%, #e6f4ea 100%);
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebf8e1 100%);
+            text-align: center;
         }
-        .logo-cow {
-            animation: moveCow 4s infinite cubic-bezier(.68,-0.55,.27,1.55);
+
+        /* A more subtle and smooth animation for the cow logo */
+        .logo-cow-animation {
+            animation: floatCow 6s ease-in-out infinite;
         }
-        @keyframes moveCow {
-            0%, 100% { transform: translateY(-8px) }
-            50% { transform: translateY(8px) }
+
+        @keyframes floatCow {
+            0%, 100% { transform: translateY(-5px) rotate(-1deg); }
+            50% { transform: translateY(5px) rotate(1deg); }
         }
+
+        /* A decorative border using a traditional pattern style */
         .heritage-border {
+            padding-top: 12px;
             background-image: repeating-linear-gradient(
                 90deg,
-                #eab308 0px,
-                #eab308 4px,
-                transparent 4px,
-                transparent 16px
+                #fcd34d 0,
+                #fcd34d 5px,
+                transparent 5px,
+                transparent 20px
             );
+            background-position: top center;
+            background-repeat: no-repeat;
+            background-size: 100% 12px;
+        }
+        
+        /* Custom font family for headings */
+        .font-display {
+            font-family: 'Roboto Slab', serif;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-center items-center">
+<body class="min-h-screen flex flex-col justify-center items-center p-4">
 
-    <main class="heritage-border w-full max-w-2xl mx-auto bg-white/90 rounded-3xl shadow-2xl p-8 md:p-12 mt-10 mb-8 relative overflow-hidden">
-        <!-- Decorative Motif -->
-        <div class="absolute top-0 left-0 w-40 h-40 opacity-30 pointer-events-none">
-            <svg viewBox="0 0 100 100" fill="none">
-                <circle cx="50" cy="50" r="46" stroke="#a3e635" stroke-width="8" />
-                <path d="M50 20 Q55 35 70 30 Q60 50 80 50 Q65 60 78 78 Q60 75 50 90 Q40 75 22 78 Q35 60 20 50 Q40 50 30 30 Q45 35 50 20Z" fill="#eab308"/>
+    <!-- Main content card -->
+    <main class="w-full max-w-2xl mx-auto bg-white/95 rounded-3xl shadow-xl heritage-border relative overflow-hidden">
+        
+        <!-- Decorative corner motif -->
+        <div class="absolute top-0 right-0 w-32 h-32 -mt-4 -mr-8 opacity-20 pointer-events-none transform-gpu">
+            <svg viewBox="0 0 100 100" fill="#a3e635" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 0C61.0457 0 70 8.95431 70 20C70 31.0457 61.0457 40 50 40C38.9543 40 30 31.0457 30 20C30 8.95431 38.9543 0 50 0ZM50 60C61.0457 60 70 68.9543 70 80C70 91.0457 61.0457 100 50 100C38.9543 100 30 91.0457 30 80C30 68.9543 38.9543 60 50 60Z" />
             </svg>
         </div>
-        <!-- Cow Logo -->
-        <div class="mx-auto mb-6">
-            <svg class="logo-cow w-24 h-24 mx-auto text-yellow-700 drop-shadow-xl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-label="Cow Logo">
-                <ellipse cx="32" cy="38" rx="16" ry="12" fill="#fff8dc" stroke="#7c3f00" stroke-width="2"/>
-                <ellipse cx="32" cy="38" rx="16" ry="12" fill="#fff8dc"/>
-                <ellipse cx="32" cy="32" rx="14" ry="10" fill="#eab308" stroke="#7c3f00" stroke-width="2"/>
-                <circle cx="24" cy="34" r="2" fill="#222"/>
-                <circle cx="40" cy="34" r="2" fill="#222"/>
-                <ellipse cx="32" cy="44" rx="6" ry="3" fill="#fff" stroke="#7c3f00" stroke-width="1"/>
-                <rect x="20" y="22" width="24" height="7" rx="3" fill="#fff8dc" stroke="#7c3f00" stroke-width="2"/>
-                <!-- Horns -->
-                <path d="M20 24 Q15 10 28 18" stroke="#7c3f00" stroke-width="2" fill="none"/>
-                <path d="M44 24 Q49 10 36 18" stroke="#7c3f00" stroke-width="2" fill="none"/>
-            </svg>
-        </div>
-        <!-- Main Heading -->
-        <h1 class="text-4xl md:text-5xl font-extrabold text-yellow-700 font-['Roboto_Slab'] mb-3">
-            SuDhama Farm
-        </h1>
-        <p class="text-xl md:text-2xl text-green-900 font-semibold mb-3">
-            Taste the Tradition of Rural Udupi Dairy
-        </p>
-        <p class="text-base md:text-lg text-gray-700 mb-6 max-w-lg mx-auto">
-            Experience authentic, farm-fresh dairy products crafted with care and tradition in the heart of Udupi. Our cows graze on lush pastures, and every product is a tribute to the purity, heritage, and hospitality of rural Karnataka.
-        </p>
-        <!-- Feature Highlights -->
-        <div class="flex flex-wrap gap-4 justify-center mb-8">
-            <div class="bg-green-100 rounded-xl px-4 py-2 flex items-center gap-2 text-green-800 font-semibold shadow-sm">
-                <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 13v7"></path></svg>
-                Farm-to-Table Freshness
+
+        <div class="p-8 md:p-12">
+            <!-- Refined Cow Logo -->
+            <div class="mx-auto mb-6">
+                <svg class="logo-cow-animation w-28 h-28 mx-auto drop-shadow-lg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="SuDhama Farm Cow Logo">
+                    <defs>
+                        <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                            <feOffset dx="2" dy="4" result="offsetblur"/>
+                            <feComponentTransfer>
+                                <feFuncA type="linear" slope="0.5"/>
+                            </feComponentTransfer>
+                            <feMerge>
+                                <feMergeNode/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <g filter="url(#dropShadow)">
+                        <!-- Head -->
+                        <path d="M100 50 C 60 50, 50 100, 100 140 C 150 100, 140 50, 100 50 Z" fill="#D2B48C" />
+                        <!-- Snout -->
+                        <path d="M100 120 C 80 155, 120 155, 100 120 Z" fill="#FFDBAC" />
+                        <ellipse cx="100" cy="135" rx="35" ry="18" fill="#FFDBAC" />
+                        <!-- Eyes -->
+                        <circle cx="80" cy="95" r="8" fill="#333" />
+                        <circle cx="120" cy="95" r="8" fill="#333" />
+                        <!-- Nostrils -->
+                        <circle cx="92" cy="138" r="4" fill="#654321" />
+                        <circle cx="108" cy="138" r="4" fill="#654321" />
+                        <!-- Horns -->
+                        <path d="M75 60 Q 50 20, 85 40" stroke="#A0522D" stroke-width="12" stroke-linecap="round" fill="none" />
+                        <path d="M125 60 Q 150 20, 115 40" stroke="#A0522D" stroke-width="12" stroke-linecap="round" fill="none" />
+                        <!-- Ears -->
+                        <path d="M60 80 C 40 70, 40 110, 60 100 Z" fill="#D2B48C" />
+                        <path d="M140 80 C 160 70, 160 110, 140 100 Z" fill="#D2B48C" />
+                    </g>
+                </svg>
             </div>
-            <div class="bg-yellow-100 rounded-xl px-4 py-2 flex items-center gap-2 text-yellow-800 font-semibold shadow-sm">
-                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"></path></svg>
-                Udupi Heritage & Purity
+
+            <!-- Main Heading -->
+            <header>
+                <h1 class="text-4xl md:text-5xl font-bold text-yellow-800 font-display mb-2">
+                    SuDhama Farm
+                </h1>
+                <p class="text-xl md:text-2xl text-green-800 font-semibold mb-4">
+                    Taste the Tradition of Rural Udupi Dairy
+                </p>
+            </header>
+
+            <p class="text-base md:text-lg text-gray-700 mb-8 max-w-prose mx-auto">
+                Experience authentic, farm-fresh dairy products crafted with care and tradition in the heart of Udupi. Our cows graze on lush pastures, and every product is a tribute to the purity, heritage, and hospitality of rural Karnataka.
+            </p>
+
+            <!-- Feature Highlights -->
+            <div class="flex flex-wrap gap-4 justify-center mb-10">
+                <div class="bg-green-100 rounded-xl px-4 py-2 flex items-center gap-2 text-green-800 font-semibold shadow-sm transform transition-transform hover:scale-105">
+                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                    Farm-to-Table Freshness
+                </div>
+                <div class="bg-yellow-100 rounded-xl px-4 py-2 flex items-center gap-2 text-yellow-800 font-semibold shadow-sm transform transition-transform hover:scale-105">
+                     <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Udupi Heritage & Purity
+                </div>
+                <div class="bg-orange-100 rounded-xl px-4 py-2 flex items-center gap-2 text-orange-800 font-semibold shadow-sm transform transition-transform hover:scale-105">
+                    <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    Community & Sustainability
+                </div>
             </div>
-            <div class="bg-white rounded-xl px-4 py-2 flex items-center gap-2 text-brown-800 font-semibold shadow-sm border border-yellow-300">
-                <svg class="w-5 h-5 text-yellow-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                Community & Sustainability
-            </div>
-        </div>
-        <!-- Call to Action -->
-        <a href="https://www.google.com/maps/place/%E0%B2%B8%E0%B3%81%E0%B2%A7%E0%B2%BE%E0%B2%AE/@13.424356,74.9682144,17z/data=!3m1!4b1!4m6!3m5!1s0x3bbb5f0028f20293:0x1f97240b6ea82aa0!8m2!3d13.424356!4d74.9704031!16s%2Fg%2F11h7w0n5lp"
-           class="inline-flex items-center justify-center gap-2 bg-yellow-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-yellow-800 transition-colors duration-300 shadow-lg mb-6"
-           target="_blank"
-           rel="noopener noreferrer"
-        >
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z"/></svg>
-            Find Us in Udupi
-        </a>
-        <!-- Contact Info -->
-        <div class="text-center mt-6 mb-2 text-gray-600">
-            <p>For enquiries and orders: <a href="mailto:info@sudhamafarm.com" class="underline text-yellow-700 hover:text-yellow-900">info@sudhamafarm.com</a></p>
-            <p>Call: <a href="tel:+919876543210" class="underline text-yellow-700 hover:text-yellow-900">+91 98765 43210</a></p>
+
+            <!-- Call to Action -->
+            <a href="https://www.google.com/maps/place/%E0%B2%B8%E0%B3%81%E0%B2%A7%E0%B2%BE%E0%B2%AE/@13.424356,74.9682144,17z/data=!3m1!4b1!4m6!3m5!1s0x3bbb5f0028f20293:0x1f97240b6ea82aa0!8m2!3d13.424356!4d74.9704031!16s%2Fg%2F11h7w0n5lp"
+               class="inline-flex items-center justify-center gap-2 bg-yellow-700 text-white font-bold py-3 px-8 rounded-full hover:bg-yellow-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mb-6"
+               target="_blank"
+               rel="noopener noreferrer">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+                Find Us in Udupi
+            </a>
+
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="w-full text-center py-4 bg-yellow-50 border-t border-yellow-200 text-sm text-yellow-800">
-        © <span id="year"></span> Sudhamafarm.com – Crafted with ❤️ in Udupi, Karnataka.
+    <footer class="w-full text-center py-5 mt-8 text-sm text-yellow-900/80">
+        © <span id="year"></span> SuDhama Farm – Crafted with ❤️ in Udupi, Karnataka.
     </footer>
 
     <script>
+        // Set the current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
