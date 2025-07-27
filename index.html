@@ -1,162 +1,373 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuDhama Farm – Taste the Tradition of Udupi</title>
-    <meta name="description" content="SuDhama Farm brings the fresh, pure goodness of rural Udupi dairy to your table. Discover our farm, products, and heritage.">
-    
-    <!-- Favicon - A simplified version of the logo -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐄</text></svg>">
-
-    <!-- Tailwind CSS CDN -->
+    <title>SuDhama: The Good Home</title>
+    <link rel="icon" href="https://i.imgur.com/uDb0N4A.jpeg" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Nunito & Roboto Slab -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles for the page */
+        :root {
+            --bg-color: #FBF9F6; /* Coconut White */
+            --text-color: #3D3A37;
+            --accent-color: #C27D38; /* Terracotta */
+            --green-color: #4A5745; /* Forest Green */
+        }
         body {
-            font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #fdfbfb 0%, #ebf8e1 100%);
-            text-align: center;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            background-image: url('https://www.transparenttextures.com/patterns/subtle-grain.png');
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-
-        /* A more subtle and smooth animation for the cow logo */
-        .logo-cow-animation {
-            animation: floatCow 6s ease-in-out infinite;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
         }
-
-        @keyframes floatCow {
-            0%, 100% { transform: translateY(-5px) rotate(-1deg); }
-            50% { transform: translateY(5px) rotate(1deg); }
+        .nav-link {
+            position: relative;
+            transition: color 0.4s ease;
+            padding-bottom: 8px;
         }
-
-        /* A decorative border using a traditional pattern style */
-        .heritage-border {
-            padding-top: 12px;
-            background-image: repeating-linear-gradient(
-                90deg,
-                #fcd34d 0,
-                #fcd34d 5px,
-                transparent 5px,
-                transparent 20px
-            );
-            background-position: top center;
-            background-repeat: no-repeat;
-            background-size: 100% 12px;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-color);
+            transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        
-        /* Custom font family for headings */
-        .font-display {
-            font-family: 'Roboto Slab', serif;
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
         }
+        .hero-image {
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1600585152225-3589FE934ce8?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+        }
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1.2s cubic-bezier(0.165, 0.84, 0.44, 1), transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .glassmorphism {
+            background: rgba(251, 249, 246, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .polaroid {
+            @apply bg-white p-4 pb-16 rounded-sm shadow-lg transform -rotate-3 transition-transform duration-300 hover:rotate-0 hover:scale-105;
+        }
+        /* Carousel styles */
+        .carousel-container { overflow: hidden; }
+        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+        .carousel-slide { flex: 0 0 100%; }
+        /* Lightbox styles */
+        .lightbox { display: none; }
+        .lightbox.active { display: flex; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-center items-center p-4">
+<body class="antialiased">
 
-    <!-- Main content card -->
-    <main class="w-full max-w-2xl mx-auto bg-white/95 rounded-3xl shadow-xl heritage-border relative overflow-hidden">
-        
-        <!-- Decorative corner motif -->
-        <div class="absolute top-0 right-0 w-32 h-32 -mt-4 -mr-8 opacity-20 pointer-events-none transform-gpu">
-            <svg viewBox="0 0 100 100" fill="#a3e635" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 0C61.0457 0 70 8.95431 70 20C70 31.0457 61.0457 40 50 40C38.9543 40 30 31.0457 30 20C30 8.95431 38.9543 0 50 0ZM50 60C61.0457 60 70 68.9543 70 80C70 91.0457 61.0457 100 50 100C38.9543 100 30 91.0457 30 80C30 68.9543 38.9543 60 50 60Z" />
-            </svg>
-        </div>
-
-        <div class="p-8 md:p-12">
-            <!-- Refined Cow Logo -->
-            <div class="mx-auto mb-6">
-                <svg class="logo-cow-animation w-28 h-28 mx-auto drop-shadow-lg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="SuDhama Farm Cow Logo">
-                    <defs>
-                        <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
-                            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-                            <feOffset dx="2" dy="4" result="offsetblur"/>
-                            <feComponentTransfer>
-                                <feFuncA type="linear" slope="0.5"/>
-                            </feComponentTransfer>
-                            <feMerge>
-                                <feMergeNode/>
-                                <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                        </filter>
-                    </defs>
-                    <g filter="url(#dropShadow)">
-                        <!-- Head -->
-                        <path d="M100 50 C 60 50, 50 100, 100 140 C 150 100, 140 50, 100 50 Z" fill="#D2B48C" />
-                        <!-- Snout -->
-                        <path d="M100 120 C 80 155, 120 155, 100 120 Z" fill="#FFDBAC" />
-                        <ellipse cx="100" cy="135" rx="35" ry="18" fill="#FFDBAC" />
-                        <!-- Eyes -->
-                        <circle cx="80" cy="95" r="8" fill="#333" />
-                        <circle cx="120" cy="95" r="8" fill="#333" />
-                        <!-- Nostrils -->
-                        <circle cx="92" cy="138" r="4" fill="#654321" />
-                        <circle cx="108" cy="138" r="4" fill="#654321" />
-                        <!-- Horns -->
-                        <path d="M75 60 Q 50 20, 85 40" stroke="#A0522D" stroke-width="12" stroke-linecap="round" fill="none" />
-                        <path d="M125 60 Q 150 20, 115 40" stroke="#A0522D" stroke-width="12" stroke-linecap="round" fill="none" />
-                        <!-- Ears -->
-                        <path d="M60 80 C 40 70, 40 110, 60 100 Z" fill="#D2B48C" />
-                        <path d="M140 80 C 160 70, 160 110, 140 100 Z" fill="#D2B48C" />
-                    </g>
-                </svg>
-            </div>
-
-            <!-- Main Heading -->
-            <header>
-                <h1 class="text-4xl md:text-5xl font-bold text-yellow-800 font-display mb-2">
-                    SuDhama Farm
-                </h1>
-                <p class="text-xl md:text-2xl text-green-800 font-semibold mb-4">
-                    Taste the Tradition of Rural Udupi Dairy
-                </p>
-            </header>
-
-            <p class="text-base md:text-lg text-gray-700 mb-8 max-w-prose mx-auto">
-                Experience authentic, farm-fresh dairy products crafted with care and tradition in the heart of Udupi. Our cows graze on lush pastures, and every product is a tribute to the purity, heritage, and hospitality of rural Karnataka.
-            </p>
-
-            <!-- Feature Highlights -->
-            <div class="flex flex-wrap gap-4 justify-center mb-10">
-                <div class="bg-green-100 rounded-xl px-4 py-2 flex items-center gap-2 text-green-800 font-semibold shadow-sm transform transition-transform hover:scale-105">
-                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
-                    Farm-to-Table Freshness
-                </div>
-                <div class="bg-yellow-100 rounded-xl px-4 py-2 flex items-center gap-2 text-yellow-800 font-semibold shadow-sm transform transition-transform hover:scale-105">
-                     <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    Udupi Heritage & Purity
-                </div>
-                <div class="bg-orange-100 rounded-xl px-4 py-2 flex items-center gap-2 text-orange-800 font-semibold shadow-sm transform transition-transform hover:scale-105">
-                    <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                    Community & Sustainability
-                </div>
-            </div>
-
-            <!-- Call to Action -->
-            <a href="https://www.google.com/maps/place/%E0%B2%B8%E0%B3%81%E0%B2%A7%E0%B2%BE%E0%B2%AE/@13.424356,74.9682144,17z/data=!3m1!4b1!4m6!3m5!1s0x3bbb5f0028f20293:0x1f97240b6ea82aa0!8m2!3d13.424356!4d74.9704031!16s%2Fg%2F11h7w0n5lp"
-               class="inline-flex items-center justify-center gap-2 bg-yellow-700 text-white font-bold py-3 px-8 rounded-full hover:bg-yellow-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mb-6"
-               target="_blank"
-               rel="noopener noreferrer">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
-                Find Us in Udupi
+    <!-- Header & Navigation -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <nav class="container mx-auto px-6 md:px-10 py-3 flex justify-between items-center">
+            <a href="#" class="block" data-page="home">
+                <img src="https://i.imgur.com/uDb0N4A.jpeg" alt="SuDhama Logo" class="h-14 w-auto">
             </a>
-
+            <div class="hidden md:flex items-center space-x-10 text-sm font-medium tracking-wide">
+                <a href="#" class="nav-link active" data-page="home">Home</a>
+                <a href="#" class="nav-link" data-page="farmhouse">The Farmhouse</a>
+                <a href="#" class="nav-link" data-page="farm">Our Farm</a>
+                <a href="#" class="nav-link" data-page="cows">Our Cows</a>
+                <a href="#" class="nav-link" data-page="story">Our Story</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-stone-800 z-50">
+                <svg id="menu-open-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <svg id="menu-close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-stone-100 flex flex-col items-center justify-center space-y-8 text-2xl">
+            <a href="#" class="nav-link" data-page="home">Home</a><a href="#" class="nav-link" data-page="farmhouse">The Farmhouse</a><a href="#" class="nav-link" data-page="farm">Our Farm</a><a href="#" class="nav-link" data-page="cows">Our Cows</a><a href="#" class="nav-link" data-page="story">Our Story</a>
         </div>
+    </header>
+
+    <main>
+        <!-- Homepage Section -->
+        <section id="home" class="page-section active">
+            <div class="hero-image flex items-center justify-center text-center text-white">
+                <div class="fade-in-up">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-4">SuDhama: The Good Home</h1>
+                    <p class="text-lg md:text-xl font-light max-w-3xl mx-auto tracking-wide">A sanctuary in the heart of Udupi, rooted in tradition, nature, and affection for the land.</p>
+                    <a href="#home-features" class="mt-8 inline-block bg-white/20 backdrop-blur-sm border border-white/50 text-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all duration-300 ease-in-out text-lg">Explore SuDhama</a>
+                </div>
+            </div>
+            <div id="home-features" class="py-24 md:py-32 bg-stone-100">
+                <div class="container mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="group fade-in-up" style="transition-delay: 100ms;">
+                        <div class="bg-white rounded-lg overflow-hidden shadow-lg transform group-hover:-translate-y-2 transition-transform duration-300">
+                            <img src="https://images.unsplash.com/photo-1620766165457-a877c9b99332?q=80&w=600&h=800&auto=format&fit=crop" alt="Angled front view with textured stonework." class="w-full h-80 object-cover">
+                            <div class="p-8 text-center">
+                                <h3 class="text-2xl font-bold mb-2">The Farmhouse</h3>
+                                <p class="text-stone-600 mb-6">The heart of our property. A rustic, laterite home embracing simplicity.</p>
+                                <button class="font-semibold text-amber-700 hover:underline" data-page="farmhouse">Discover the House →</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group fade-in-up" style="transition-delay: 200ms;">
+                         <div class="bg-white rounded-lg overflow-hidden shadow-lg transform group-hover:-translate-y-2 transition-transform duration-300">
+                            <img src="https://images.unsplash.com/photo-1590502625992-3663b615b839?q=80&w=600&h=800&auto=format&fit=crop" alt="Drone shot over the 3-acre grove." class="w-full h-80 object-cover">
+                            <div class="p-8 text-center">
+                                <h3 class="text-2xl font-bold mb-2">The Land</h3>
+                                <p class="text-stone-600 mb-6">A lush mix of coconut, arecanut, and fruit trees grown with organic love.</p>
+                                <button class="font-semibold text-amber-700 hover:underline" data-page="farm">Explore the Farm →</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group fade-in-up" style="transition-delay: 300ms;">
+                         <div class="bg-white rounded-lg overflow-hidden shadow-lg transform group-hover:-translate-y-2 transition-transform duration-300">
+                            <img src="https://images.unsplash.com/photo-1594034893542-20a6a1a4555e?q=80&w=600&h=800&auto=format&fit=crop" alt="Close-up of a cow with natural backdrop." class="w-full h-80 object-cover">
+                            <div class="p-8 text-center">
+                                <h3 class="text-2xl font-bold mb-2">The Cows</h3>
+                                <p class="text-stone-600 mb-6">More than cattle—they’re family. Rescued, revered, and cared for.</p>
+                                <button class="font-semibold text-amber-700 hover:underline" data-page="cows">Meet Our Cows →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Farmhouse Page -->
+        <section id="farmhouse" class="page-section py-24 md:py-32">
+            <div class="container mx-auto px-6 md:px-10 space-y-24">
+                <div class="text-center max-w-4xl mx-auto fade-in-up">
+                    <h1 class="text-5xl md:text-7xl text-stone-800 mb-6">A Home Built from the Land</h1>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center fade-in-up">
+                    <div class="space-y-6">
+                        <h2 class="text-4xl text-stone-800">Architecture & Design</h2>
+                        <p class="text-stone-600 leading-relaxed text-lg">Built with locally sourced Laterite stone, the farmhouse embodies zero-mile construction. Its design respects the local climate with natural cross-ventilation and traditional clay tiles, creating a space that breathes with the land.</p>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1525909002-1515b5720388?q=80&w=800&h=600&auto=format&fit=crop" alt="Textured laterite stone wall" class="rounded-lg shadow-xl w-full h-full object-cover">
+                </div>
+                <div class="fade-in-up">
+                    <h2 class="text-4xl text-stone-800 text-center mb-12">A Visual Walkthrough</h2>
+                    <div id="farmhouse-gallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <img src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=800&h=600&auto=format&fit=crop" alt="Cozy Bedroom with natural light" class="gallery-item rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity">
+                        <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=800&h=600&auto=format&fit=crop" alt="Modern Kitchen with brass utensils" class="gallery-item rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity">
+                        <img src="https://images.unsplash.com/photo-1582533342234-9925b0277b55?q=80&w=800&h=600&auto=format&fit=crop" alt="Bathroom with earth-toned minimalism" class="gallery-item rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity">
+                        <img src="https://images.unsplash.com/photo-1588421329369-89b91a271455?q=80&w=800&h=600&auto=format&fit=crop" alt="View from the veranda to the forest" class="gallery-item rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Farm Page -->
+        <section id="farm" class="page-section py-24 md:py-32 bg-white">
+             <div class="container mx-auto px-6 md:px-10 space-y-24">
+                <div class="text-center max-w-4xl mx-auto fade-in-up">
+                    <h1 class="text-5xl md:text-7xl text-stone-800 mb-6">The Land and Its Bounty</h1>
+                </div>
+                <div class="fade-in-up">
+                    <h2 class="text-4xl text-stone-800 text-center mb-12">Our Plantations</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <!-- Interactive hover cards for plants -->
+                        <div class="group relative rounded-lg overflow-hidden"><img src="https://images.unsplash.com/photo-1582998352412-1b13a10b4916?q=80&w=400&h=400&auto=format&fit=crop" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Mangoes</h4></div></div>
+                        <div class="group relative rounded-lg overflow-hidden"><img src="https://images.unsplash.com/photo-1550258987-190a2347bba7?q=80&w=400&h=400&auto=format&fit=crop" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Bananas</h4></div></div>
+                        <div class="group relative rounded-lg overflow-hidden"><img src="https://images.unsplash.com/photo-1553809831-674f856dfd84?q=80&w=400&h=400&auto=format&fit=crop" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Jackfruit</h4></div></div>
+                        <div class="group relative rounded-lg overflow-hidden"><img src="https://images.unsplash.com/photo-1625237934842-576a1427a853?q=80&w=400&h=400&auto=format&fit=crop" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Cocoa</h4></div></div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center fade-in-up">
+                    <div class="space-y-6">
+                        <h2 class="text-4xl text-stone-800">Sustainable Practices</h2>
+                        <div class="space-y-4"><h3 class="font-bold text-lg">Soil Health</h3><p>We enrich our soil using only manure from our own cows and compost prepared on the farm.</p></div>
+                        <div class="space-y-4"><h3 class="font-bold text-lg">Water Management</h3><p>Drip irrigation conserves water, and rainwater harvesting pits replenish the groundwater.</p></div>
+                        <div class="space-y-4"><h3 class="font-bold text-lg">Zero Chemicals</h3><p>We are organic-certification ready, nurturing a healthy ecosystem free of pesticides.</p></div>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=800&h=600&auto=format&fit=crop" alt="Hands holding rich, dark soil" class="rounded-lg shadow-xl w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Cows Page -->
+        <section id="cows" class="page-section py-24 md:py-32">
+            <div class="container mx-auto px-6 md:px-10 space-y-24">
+                <div class="text-center max-w-4xl mx-auto fade-in-up">
+                    <h1 class="text-5xl md:text-7xl text-stone-800 mb-6">More Than a Goshala, It’s a Family</h1>
+                </div>
+                <div class="fade-in-up">
+                    <h2 class="text-4xl text-stone-800 text-center mb-12">Meet the Herd</h2>
+                    <div class="relative carousel-container">
+                        <div class="carousel-track">
+                            <div class="carousel-slide text-center"><img src="https://images.unsplash.com/photo-1618274738332-5d1bd6151978?q=80&w=800&h=600&auto=format&fit=crop" class="mx-auto rounded-lg shadow-xl"><h3 class="text-2xl mt-4">Gauri</h3><p>Rescued in 2021, now our gentle matriarch.</p></div>
+                            <div class="carousel-slide text-center"><img src="https://images.unsplash.com/photo-1599029199949-c17013c3290b?q=80&w=800&h=600&auto=format&fit=crop" class="mx-auto rounded-lg shadow-xl"><h3 class="text-2xl mt-4">Nandi</h3><p>A playful spirit who loves his daily porridge.</p></div>
+                        </div>
+                        <button class="carousel-prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/50 p-2 rounded-full">←</button>
+                        <button class="carousel-next absolute top-1/2 right-0 transform -translate-y-1/2 bg-white/50 p-2 rounded-full">→</button>
+                    </div>
+                </div>
+                <div class="text-center fade-in-up">
+                    <h2 class="text-4xl text-stone-800 mb-12">Daily Life</h2>
+                    <p class="max-w-2xl mx-auto text-lg mb-8">"They bring us peace and rhythm."</p>
+                    <button id="dairy-teaser-button" class="bg-amber-700 text-white px-8 py-3 rounded-full hover:bg-amber-800 transition-all">Future: The SuDhama Dairy</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Story Page -->
+        <section id="story" class="page-section py-24 md:py-32 bg-white">
+            <div class="container mx-auto px-6 md:px-10 space-y-24">
+                <div class="text-center max-w-4xl mx-auto fade-in-up">
+                    <h1 class="text-5xl md:text-7xl text-stone-800 mb-6">The Second Innings: Our Journey</h1>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center fade-in-up">
+                    <div class="space-y-6">
+                        <h2 class="text-4xl text-stone-800">A Letter From Us</h2>
+                        <p class="text-stone-600 leading-relaxed text-lg" style="font-family: 'Playfair Display', serif;">This land brought us back to ourselves. After decades in the city, we yearned for a life connected to the soil and seasons. SuDhama is more than a farm; it's the culmination of a dream—a place to nurture, heal, and live in harmony with nature. We are grateful to share its peace with you. <br>- Sudha & Girish</p>
+                    </div>
+                    <div class="polaroid">
+                        <img src="https://images.unsplash.com/photo-1548282226-90535543c475?q=80&w=800&h=600&auto=format&fit=crop" alt="HappyFamily" class="w-full">
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
-    <footer class="w-full text-center py-5 mt-8 text-sm text-yellow-900/80">
-        © <span id="year"></span> SuDhama Farm – Crafted with ❤️ in Udupi, Karnataka.
+    <footer class="bg-stone-800 text-stone-300 py-20">
+        <div class="container mx-auto px-6 md:px-10 text-center">
+            <div class="inline-block p-2 bg-stone-100 rounded-full mx-auto mb-4">
+                <a href="#" data-page="home"><img src="https://i.imgur.com/uDb0N4A.jpeg" alt="SuDhama Logo" class="h-16 w-auto"></a>
+            </div>
+            <p class="text-stone-400">A Good Home. A Good Life.</p>
+            <div class="mt-8 space-x-6 text-sm"><a href="#" class="hover:text-white transition" data-page="farmhouse">The Farmhouse</a><a href="#" class="hover:text-white transition" data-page="farm">Our Farm</a><a href="#" class="hover:text-white transition" data-page="cows">Our Cows</a><a href="#" class="hover:text-white transition" data-page="story">Our Story</a></div>
+            <div class="mt-12 max-w-md mx-auto fade-in-up">
+                <h4 class="text-lg font-semibold mb-2">Let nature write to you.</h4>
+                <form class="flex"><input type="email" placeholder="Your email address" class="w-full rounded-l-md p-3 text-black"><button type="submit" class="bg-amber-700 text-white px-6 rounded-r-md">Sign Up</button></form>
+            </div>
+            <p class="text-xs text-stone-500 mt-12">&copy; 2025 SuDhama. All Rights Reserved.</p>
+        </div>
     </footer>
 
+    <!-- Lightbox for Dairy Teaser -->
+    <div id="dairy-lightbox" class="lightbox fixed inset-0 bg-black/70 z-50 items-center justify-center">
+        <div class="bg-white p-8 rounded-lg text-center max-w-md relative">
+            <button id="close-lightbox" class="absolute top-2 right-4 text-2xl">&times;</button>
+            <h3 class="text-3xl font-bold mb-4">Coming Soon</h3>
+            <p class="text-stone-600 mb-4">Our dream is to extend this love into a small, ethical dairy business, providing pure, small-batch milk from happy cows.</p>
+            <img src="https://images.unsplash.com/photo-1563693267-34044a492592?q=80&w=500&h=400&auto=format&fit=crop" class="rounded-lg mx-auto">
+        </div>
+    </div>
+    
+    <!-- Gallery Lightbox -->
+    <div id="gallery-lightbox" class="lightbox fixed inset-0 bg-black/80 z-50 items-center justify-center p-4">
+        <button id="close-gallery-lightbox" class="absolute top-4 right-6 text-white text-4xl">&times;</button>
+        <img id="gallery-lightbox-image" src="" class="max-w-full max-h-full">
+    </div>
+
     <script>
-        // Set the current year in the footer
-        document.getElementById('year').textContent = new Date().getFullYear();
+    document.addEventListener('DOMContentLoaded', function () {
+        const pageLinks = document.querySelectorAll('a[data-page], button[data-page]');
+        const pages = document.querySelectorAll('.page-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOpenIcon = document.getElementById('menu-open-icon');
+        const menuCloseIcon = document.getElementById('menu-close-icon');
+        const header = document.getElementById('header');
+
+        // Page Navigation
+        const showPage = (pageId) => {
+            pages.forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId)?.classList.add('active');
+            navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === pageId));
+            mobileMenu.classList.add('hidden');
+            menuOpenIcon.classList.remove('hidden');
+            menuCloseIcon.classList.add('hidden');
+            document.body.style.overflow = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Re-trigger animations
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                 targetPage.querySelectorAll('.fade-in-up').forEach(el => el.classList.remove('visible'));
+                 observeAnimatedElements(targetPage);
+            }
+        };
+        pageLinks.forEach(link => link.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(link.dataset.page);
+        }));
+
+        // Mobile Menu
+        mobileMenuButton.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.toggle('hidden');
+            menuOpenIcon.classList.toggle('hidden', !isHidden);
+            menuCloseIcon.classList.toggle('hidden', isHidden);
+            document.body.style.overflow = isHidden ? '' : 'hidden';
+        });
+
+        // Header Style
+        window.addEventListener('scroll', () => header.classList.toggle('glassmorphism', window.scrollY > 20));
+
+        // Scroll Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        const observeAnimatedElements = (container) => {
+            container.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+        };
+        observeAnimatedElements(document.querySelector('.page-section.active'));
+
+        // Cow Carousel
+        const track = document.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const nextButton = document.querySelector('.carousel-next');
+        const prevButton = document.querySelector('.carousel-prev');
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        let currentIndex = 0;
+        const moveToSlide = (targetIndex) => {
+            track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
+            currentIndex = targetIndex;
+        };
+        nextButton.addEventListener('click', () => moveToSlide((currentIndex + 1) % slides.length));
+        prevButton.addEventListener('click', () => moveToSlide((currentIndex - 1 + slides.length) % slides.length));
+        
+        // Dairy Lightbox
+        const dairyLightbox = document.getElementById('dairy-lightbox');
+        document.getElementById('dairy-teaser-button').addEventListener('click', () => dairyLightbox.classList.add('active'));
+        document.getElementById('close-lightbox').addEventListener('click', () => dairyLightbox.classList.remove('active'));
+
+        // Farmhouse Gallery Lightbox
+        const galleryLightbox = document.getElementById('gallery-lightbox');
+        const galleryLightboxImage = document.getElementById('gallery-lightbox-image');
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                galleryLightboxImage.src = item.src;
+                galleryLightbox.classList.add('active');
+            });
+        });
+        document.getElementById('close-gallery-lightbox').addEventListener('click', () => galleryLightbox.classList.remove('active'));
+    });
     </script>
 </body>
 </html>
