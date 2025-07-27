@@ -71,12 +71,10 @@
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-        .polaroid {
-            @apply bg-white p-4 pb-16 rounded-sm shadow-lg transform -rotate-3 transition-transform duration-300 hover:rotate-0 hover:scale-105;
-        }
         /* Carousel styles */
         .carousel-container { overflow: hidden; position: relative; }
-        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; cursor: grab; }
+        .carousel-track:active { cursor: grabbing; }
         .carousel-slide { flex: 0 0 100%; box-sizing: border-box; padding: 0 1rem; }
         /* Lightbox styles */
         .lightbox { display: none; }
@@ -118,8 +116,8 @@
         <!-- Homepage Section -->
         <section id="home" class="page-section active">
             <div class="hero-image flex items-center justify-center text-center text-white">
-                <div class="fade-in-up">
-                    <h1 class="text-5xl md:text-7xl font-bold mb-4">SuDhama: The Good Home</h1>
+                <div class="fade-in-up px-4">
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4">SuDhama: The Good Home</h1>
                     <p class="text-lg md:text-xl font-light max-w-3xl mx-auto tracking-wide">A sanctuary in the heart of Udupi, rooted in tradition, nature, and affection for the land.</p>
                     <a href="#home-features" class="mt-8 inline-block bg-white/20 backdrop-blur-sm border border-white/50 text-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all duration-300 ease-in-out text-lg">Explore SuDhama</a>
                 </div>
@@ -164,14 +162,15 @@
         <section id="farmhouse" class="page-section py-24 md:py-32">
             <div class="container mx-auto px-6 md:px-10 space-y-24">
                 <div class="text-center max-w-4xl mx-auto fade-in-up">
-                    <h1 class="text-5xl md:text-7xl text-stone-800 mb-6">A Home Built from the Land</h1>
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl text-stone-800 mb-6">A Home Built from the Land</h1>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center fade-in-up">
                     <div class="space-y-6">
-                        <h2 class="text-4xl text-stone-800">Architecture & Design</h2>
+                        <h2 class="text-3xl md:text-4xl text-stone-800">Architecture & Design</h2>
                         <p class="text-stone-600 leading-relaxed text-lg">Built with locally sourced Laterite stone, the farmhouse embodies zero-mile construction. Its design respects the local climate with natural cross-ventilation and traditional clay tiles, creating a space that breathes with the land.</p>
                     </div>
                     <img src="images/latHome.jpg" alt="Textured laterite stone wall" class="rounded-lg shadow-xl w-full h-full object-cover">
+                </div>
             </div>
         </section>
 
@@ -179,24 +178,24 @@
         <section id="farm" class="page-section py-24 md:py-32 bg-white">
              <div class="container mx-auto px-6 md:px-10 space-y-24">
                 <div class="text-center max-w-4xl mx-auto fade-in-up">
-                    <h1 class="text-5xl md:text-7xl text-stone-800 mb-6">The Land and Its Bounty</h1>
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl text-stone-800 mb-6">The Land and Its Bounty</h1>
                 </div>
                 <div class="fade-in-up">
-                    <h2 class="text-4xl text-stone-800 text-center mb-12">Our Plantations</h2>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Mango.png" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Mangoes</h4></div></div>
-                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Banana.jpg" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Bananas</h4></div></div>
-                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Jackfruit.png" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Jackfruit</h4></div></div>
-                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Cocoa.jpg" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Cocoa</h4></div></div>
-                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Jamun.png" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Jamun</h4></div></div>
-                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Cashew.jpg" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Cashew</h4></div></div>
-                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Sitafal.jpg" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Sita Phal</h4></div></div>
-                        <div class="group relative rounded-lg overflow-hidden"><img src="images/LakshmanPhal.jpg" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Lakshman Phal</h4></div></div>
+                    <h2 class="text-3xl md:text-4xl text-stone-800 text-center mb-12">Our Plantations</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Mango.png" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h4 class="text-white text-xl sm:text-2xl font-bold text-center">Mangoes</h4></div></div>
+                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Banana.jpg" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h4 class="text-white text-xl sm:text-2xl font-bold text-center">Bananas</h4></div></div>
+                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Jackfruit.png" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h4 class="text-white text-xl sm:text-2xl font-bold text-center">Jackfruit</h4></div></div>
+                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Cocoa.jpg" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h4 class="text-white text-xl sm:text-2xl font-bold text-center">Cocoa</h4></div></div>
+                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Jamun.png" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h4 class="text-white text-xl sm:text-2xl font-bold text-center">Jamun</h4></div></div>
+                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Cashew.jpg" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h4 class="text-white text-xl sm:text-2xl font-bold text-center">Cashew</h4></div></div>
+                        <div class="group relative rounded-lg overflow-hidden"><img src="images/Sitafal.jpg" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h4 class="text-white text-xl sm:text-2xl font-bold text-center">Sita Phal</h4></div></div>
+                        <div class="group relative rounded-lg overflow-hidden"><img src="images/LakshmanPhal.jpg" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h4 class="text-white text-xl sm:text-2xl font-bold text-center">Lakshman Phal</h4></div></div>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center fade-in-up">
                     <div class="space-y-6">
-                        <h2 class="text-4xl text-stone-800">Sustainable Practices</h2>
+                        <h2 class="text-3xl md:text-4xl text-stone-800">Sustainable Practices</h2>
                         <div class="space-y-4"><h3 class="font-bold text-lg">Soil Health</h3><p>We enrich our soil using only manure from our own cows and compost prepared on the farm.</p></div>
                         <div class="space-y-4"><h3 class="font-bold text-lg">Water Management</h3><p>Drip irrigation conserves water, and rainwater harvesting pits replenish the groundwater.</p></div>
                         <div class="space-y-4"><h3 class="font-bold text-lg">Zero Chemicals</h3><p>We are organic-certification ready, nurturing a healthy ecosystem free of pesticides.</p></div>
@@ -210,21 +209,21 @@
         <section id="cows" class="page-section py-24 md:py-32">
             <div class="container mx-auto px-6 md:px-10 space-y-24">
                 <div class="text-center max-w-4xl mx-auto fade-in-up">
-                    <h1 class="text-5xl md:text-7xl text-stone-800 mb-6">More Than a Goshala, It’s a Family</h1>
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl text-stone-800 mb-6">More Than a Goshala, It’s a Family</h1>
                 </div>
                 <div class="fade-in-up">
-                    <h2 class="text-4xl text-stone-800 text-center mb-12">Meet the Herd</h2>
+                    <h2 class="text-3xl md:text-4xl text-stone-800 text-center mb-12">Meet the Herd</h2>
                     <div class="carousel-container">
                         <div class="carousel-track">
                             <div class="carousel-slide text-center"><img src="images/Gauri.jpg" class="mx-auto rounded-lg shadow-xl"><h3 class="text-2xl mt-4">Gauri</h3><p>Rescued in 2021, now our gentle matriarch.</p></div>
                             <div class="carousel-slide text-center"><img src="images/Krishna.jpg" class="mx-auto rounded-lg shadow-xl"><h3 class="text-2xl mt-4">Krishna</h3><p>A playful spirit who loves his daily porridge.</p></div>
                         </div>
-                        <button class="carousel-prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/50 p-2 rounded-full">←</button>
-                        <button class="carousel-next absolute top-1/2 right-0 transform -translate-y-1/2 bg-white/50 p-2 rounded-full">→</button>
+                        <button class="carousel-prev absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/50 p-3 rounded-full shadow-md">←</button>
+                        <button class="carousel-next absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/50 p-3 rounded-full shadow-md">→</button>
                     </div>
                 </div>
                 <div class="text-center fade-in-up">
-                    <h2 class="text-4xl text-stone-800 mb-12">Daily Life</h2>
+                    <h2 class="text-3xl md:text-4xl text-stone-800 mb-12">Daily Life</h2>
                     <p class="max-w-2xl mx-auto text-lg mb-8">"They bring us peace and rhythm."</p>
                     <button id="dairy-teaser-button" class="bg-amber-700 text-white px-8 py-3 rounded-full hover:bg-amber-800 transition-all">Future: The SuDhama Dairy</button>
                 </div>
@@ -235,16 +234,12 @@
         <section id="story" class="page-section py-24 md:py-32 bg-white">
             <div class="container mx-auto px-6 md:px-10 space-y-24">
                 <div class="text-center max-w-4xl mx-auto fade-in-up">
-                    <h1 class="text-5xl md:text-7xl text-stone-800 mb-6">The Second Innings: Our Journey</h1>
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl text-stone-800 mb-6">The Second Innings: Our Journey</h1>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center fade-in-up">
                     <div class="space-y-6">
-                        <h2 class="text-4xl text-stone-800">A Letter From Us</h2>
+                        <h2 class="text-3xl md:text-4xl text-stone-800">A Letter From Us</h2>
                         <p class="text-stone-600 leading-relaxed text-lg" style="font-family: 'Playfair Display', serif;">This land brought us back to ourselves. After decades in the city, we yearned for a life connected to the soil and seasons. SuDhama is more than a farm; it's the culmination of a dream—a place to nurture, heal, and live in harmony with nature. We are grateful to share its peace with you. <br>- Sudha & Girish</p>
-                    </div>
-                    <div class="polaroid">
-                        <img src="images/HappyFamily.jpg" alt="A photo of Sudha and Girish at the farm" class="w-full">
-                    </div>
                 </div>
             </div>
         </section>
@@ -253,12 +248,12 @@
         <section id="location" class="page-section py-24 md:py-32 bg-white">
             <div class="container mx-auto px-6 md:px-10">
                 <div class="text-center max-w-4xl mx-auto fade-in-up">
-                    <h1 class="text-5xl md:text-7xl text-stone-800 mb-6">Our Place on Earth</h1>
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl text-stone-800 mb-6">Our Place on Earth</h1>
                     <p class="text-lg text-stone-600">Find your way to our sanctuary of peace in Hebri, Udupi.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16 items-center fade-in-up">
                     <div class="space-y-6">
-                        <h2 class="text-4xl text-stone-800">Visit Us</h2>
+                        <h2 class="text-3xl md:text-4xl text-stone-800">Visit Us</h2>
                         <p class="text-stone-600 text-lg">
                             <strong class="block">SuDhama</strong>
                             8-118(1), Kanyana Village,<br>
@@ -298,7 +293,6 @@
             <button id="close-lightbox" class="absolute top-2 right-4 text-2xl">&times;</button>
             <h3 class="text-3xl font-bold mb-4">Coming Soon</h3>
             <p class="text-stone-600 mb-4">Our dream is to extend this love into a small, ethical dairy business, providing pure, small-batch milk from happy cows.</p>
-            <img src="https://images.unsplash.com/photo-1563693267-34044a492592?q=80&w=500&h=400&auto=format&fit=crop" class="rounded-lg mx-auto">
         </div>
     </div>
     
@@ -362,7 +356,7 @@
         };
         observeAnimatedElements(document.querySelector('.page-section.active'));
 
-        // Cow Carousel
+        // Cow Carousel with Touch
         const carousel = document.querySelector('.carousel-container');
         if (carousel) {
             const track = carousel.querySelector('.carousel-track');
@@ -371,25 +365,69 @@
             const prevButton = carousel.querySelector('.carousel-prev');
             let slideWidth = slides.length > 0 ? slides[0].getBoundingClientRect().width : 0;
             let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
+            let diffX = 0;
 
             const updateSlideWidth = () => {
                 if (slides.length === 0) return;
                 slideWidth = slides[0].getBoundingClientRect().width;
-                if (track) {
-                    track.style.transform = 'translateX(-' + slideWidth * currentIndex + 'px)';
-                }
+                moveToSlide(currentIndex, false);
             };
 
-            const moveToSlide = (targetIndex) => {
-                if(track) {
-                    track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
-                    currentIndex = targetIndex;
-                }
+            const moveToSlide = (targetIndex, withAnimation = true) => {
+                if (!track) return;
+                if (!withAnimation) track.style.transition = 'none';
+                track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
+                currentIndex = targetIndex;
+                if (!withAnimation) setTimeout(() => track.style.transition = 'transform 0.5s ease-in-out', 50);
             };
+
+            const handleDragStart = (e) => {
+                isDragging = true;
+                startX = e.pageX || e.touches[0].pageX;
+                track.style.transition = 'none';
+            };
+
+            const handleDragMove = (e) => {
+                if (!isDragging) return;
+                const currentX = e.pageX || e.touches[0].pageX;
+                diffX = currentX - startX;
+                track.style.transform = `translateX(${(-currentIndex * slideWidth) + diffX}px)`;
+            };
+
+            const handleDragEnd = () => {
+                if (!isDragging) return;
+                isDragging = false;
+                track.style.transition = 'transform 0.5s ease-in-out';
+                if (Math.abs(diffX) > slideWidth / 4) {
+                    if (diffX < 0 && currentIndex < slides.length - 1) {
+                        moveToSlide(currentIndex + 1);
+                    } else if (diffX > 0 && currentIndex > 0) {
+                        moveToSlide(currentIndex - 1);
+                    } else {
+                        moveToSlide(currentIndex);
+                    }
+                } else {
+                    moveToSlide(currentIndex);
+                }
+                diffX = 0;
+            };
+
             if(nextButton && prevButton){
                 nextButton.addEventListener('click', () => moveToSlide((currentIndex + 1) % slides.length));
                 prevButton.addEventListener('click', () => moveToSlide((currentIndex - 1 + slides.length) % slides.length));
             }
+            
+            track.addEventListener('mousedown', handleDragStart);
+            track.addEventListener('touchstart', handleDragStart);
+            
+            document.addEventListener('mousemove', handleDragMove);
+            document.addEventListener('touchmove', handleDragMove);
+
+            document.addEventListener('mouseup', handleDragEnd);
+            document.addEventListener('touchend', handleDragEnd);
+
             window.addEventListener('resize', updateSlideWidth);
             updateSlideWidth();
         }
