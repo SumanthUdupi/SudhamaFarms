@@ -97,6 +97,7 @@
                 <a href="#" class="nav-link" data-page="farm">Our Farm</a>
                 <a href="#" class="nav-link" data-page="cows">Our Cows</a>
                 <a href="#" class="nav-link" data-page="story">Our Story</a>
+                <a href="#" class="nav-link" data-page="location">Location</a>
             </div>
             <button id="mobile-menu-button" class="md:hidden text-stone-800 z-50">
                 <svg id="menu-open-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -104,7 +105,12 @@
             </button>
         </nav>
         <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-stone-100 flex flex-col items-center justify-center space-y-8 text-2xl">
-            <a href="#" class="nav-link" data-page="home">Home</a><a href="#" class="nav-link" data-page="farmhouse">The Farmhouse</a><a href="#" class="nav-link" data-page="farm">Our Farm</a><a href="#" class="nav-link" data-page="cows">Our Cows</a><a href="#" class="nav-link" data-page="story">Our Story</a>
+            <a href="#" class="nav-link" data-page="home">Home</a>
+            <a href="#" class="nav-link" data-page="farmhouse">The Farmhouse</a>
+            <a href="#" class="nav-link" data-page="farm">Our Farm</a>
+            <a href="#" class="nav-link" data-page="cows">Our Cows</a>
+            <a href="#" class="nav-link" data-page="story">Our Story</a>
+            <a href="#" class="nav-link" data-page="location">Location</a>
         </div>
     </header>
 
@@ -166,16 +172,6 @@
                         <p class="text-stone-600 leading-relaxed text-lg">Built with locally sourced Laterite stone, the farmhouse embodies zero-mile construction. Its design respects the local climate with natural cross-ventilation and traditional clay tiles, creating a space that breathes with the land.</p>
                     </div>
                     <img src="images/latHome.jpg" alt="Textured laterite stone wall" class="rounded-lg shadow-xl w-full h-full object-cover">
-                </div>
-                <div class="fade-in-up">
-                    <h2 class="text-4xl text-stone-800 text-center mb-12">A Visual Walkthrough</h2>
-                    <div id="farmhouse-gallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <img src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=800&h=600&auto=format&fit=crop" alt="Cozy Bedroom with natural light" class="gallery-item rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity">
-                        <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=800&h=600&auto=format&fit=crop" alt="Modern Kitchen with brass utensils" class="gallery-item rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity">
-                        <img src="https://images.unsplash.com/photo-1582533342234-9925b0277b55?q=80&w=800&h=600&auto=format&fit=crop" alt="Bathroom with earth-toned minimalism" class="gallery-item rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity">
-                        <img src="https://images.unsplash.com/photo-1588421329369-89b91a271455?q=80&w=800&h=600&auto=format&fit=crop" alt="View from the veranda to the forest" class="gallery-item rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity">
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -274,7 +270,7 @@
                         </a>
                     </div>
                     <a href="https://www.google.com/maps/place/%E0%B2%B8%E0%B3%81%E0%B2%A7%E0%B2%BE%E0%B2%AE/@13.4247466,74.9705411,172m/data=!3m1!1e3!4m6!3m5!1s0x3bbb5f0028f20293:0x1f97240b6ea82aa0!8m2!3d13.424356!4d74.9707893!16s%2Fg%2F11xdm06wx3?entry=ttu" target="_blank" rel="noopener noreferrer" class="block rounded-lg overflow-hidden shadow-2xl group">
-                        <img src="https://i.imgur.com/8z6gY4k.png" alt="Satellite view map of SuDhama farm" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300">
+                        <img src="images/Map.png" alt="Satellite view map of SuDhama farm" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300">
                     </a>
                 </div>
             </div>
@@ -295,6 +291,10 @@
                 <a href="#" class="hover:text-white transition" data-page="cows">Our Cows</a>
                 <a href="#" class="hover:text-white transition" data-page="story">Our Story</a>
                 <a href="#" class="hover:text-white transition" data-page="location">Location</a>
+            </div>
+            <div class="mt-12 max-w-md mx-auto">
+                <h4 class="text-lg font-semibold mb-2">Let nature write to you.</h4>
+                <form class="flex"><input type="email" placeholder="Your email address" class="w-full rounded-l-md p-3 text-black"><button type="submit" class="bg-amber-700 text-white px-6 rounded-r-md">Sign Up</button></form>
             </div>
             <p class="text-xs text-stone-500 mt-12">&copy; 2025 SuDhama. All Rights Reserved.</p>
         </div>
@@ -381,36 +381,50 @@
             let currentIndex = 0;
 
             const updateSlideWidth = () => {
-                slideWidth = slides.length > 0 ? slides[0].getBoundingClientRect().width : 0;
-                track.style.transform = 'translateX(-' + slideWidth * currentIndex + 'px)';
+                if (slides.length === 0) return;
+                slideWidth = slides[0].getBoundingClientRect().width;
+                if (track) {
+                    track.style.transform = 'translateX(-' + slideWidth * currentIndex + 'px)';
+                }
             };
 
             const moveToSlide = (targetIndex) => {
-                track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
-                currentIndex = targetIndex;
+                if(track) {
+                    track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
+                    currentIndex = targetIndex;
+                }
             };
-
-            nextButton.addEventListener('click', () => moveToSlide((currentIndex + 1) % slides.length));
-            prevButton.addEventListener('click', () => moveToSlide((currentIndex - 1 + slides.length) % slides.length));
+            if(nextButton && prevButton){
+                nextButton.addEventListener('click', () => moveToSlide((currentIndex + 1) % slides.length));
+                prevButton.addEventListener('click', () => moveToSlide((currentIndex - 1 + slides.length) % slides.length));
+            }
             window.addEventListener('resize', updateSlideWidth);
             updateSlideWidth();
         }
         
         // Dairy Lightbox
         const dairyLightbox = document.getElementById('dairy-lightbox');
-        document.getElementById('dairy-teaser-button').addEventListener('click', () => dairyLightbox.classList.add('active'));
-        document.getElementById('close-lightbox').addEventListener('click', () => dairyLightbox.classList.remove('active'));
+        const dairyButton = document.getElementById('dairy-teaser-button');
+        const closeDairyButton = document.getElementById('close-lightbox');
+        if(dairyButton && dairyLightbox && closeDairyButton) {
+            dairyButton.addEventListener('click', () => dairyLightbox.classList.add('active'));
+            closeDairyButton.addEventListener('click', () => dairyLightbox.classList.remove('active'));
+        }
 
         // Farmhouse Gallery Lightbox
         const galleryLightbox = document.getElementById('gallery-lightbox');
         const galleryLightboxImage = document.getElementById('gallery-lightbox-image');
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', () => {
-                galleryLightboxImage.src = item.src;
-                galleryLightbox.classList.add('active');
+        const closeGalleryButton = document.getElementById('close-gallery-lightbox');
+
+        if(galleryLightbox && galleryLightboxImage && closeGalleryButton){
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    galleryLightboxImage.src = item.src;
+                    galleryLightbox.classList.add('active');
+                });
             });
-        });
-        document.getElementById('close-gallery-lightbox').addEventListener('click', () => galleryLightbox.classList.remove('active'));
+            closeGalleryButton.addEventListener('click', () => galleryLightbox.classList.remove('active'));
+        }
     });
     </script>
 </body>
