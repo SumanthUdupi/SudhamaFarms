@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SuDhama: The Good Home</title>
-    <link rel="icon" href="images/Favicon.png" type="image/jpeg">
+    <link rel="icon" href="images/Favicon.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,9 +75,9 @@
             @apply bg-white p-4 pb-16 rounded-sm shadow-lg transform -rotate-3 transition-transform duration-300 hover:rotate-0 hover:scale-105;
         }
         /* Carousel styles */
-        .carousel-container { overflow: hidden; }
+        .carousel-container { overflow: hidden; position: relative; }
         .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
-        .carousel-slide { flex: 0 0 100%; }
+        .carousel-slide { flex: 0 0 100%; box-sizing: border-box; padding: 0 1rem; }
         /* Lightbox styles */
         .lightbox { display: none; }
         .lightbox.active { display: flex; }
@@ -167,6 +167,15 @@
                     </div>
                     <img src="images/latHome.jpg" alt="Textured laterite stone wall" class="rounded-lg shadow-xl w-full h-full object-cover">
                 </div>
+                <div class="fade-in-up">
+                    <h2 class="text-4xl text-stone-800 text-center mb-12">A Visual Walkthrough</h2>
+                    <div id="farmhouse-gallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <img src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=800&h=600&auto=format&fit=crop" alt="Cozy Bedroom with natural light" class="gallery-item rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity">
+                        <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=800&h=600&auto=format&fit=crop" alt="Modern Kitchen with brass utensils" class="gallery-item rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity">
+                        <img src="https://images.unsplash.com/photo-1582533342234-9925b0277b55?q=80&w=800&h=600&auto=format&fit=crop" alt="Bathroom with earth-toned minimalism" class="gallery-item rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity">
+                        <img src="https://images.unsplash.com/photo-1588421329369-89b91a271455?q=80&w=800&h=600&auto=format&fit=crop" alt="View from the veranda to the forest" class="gallery-item rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity">
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -179,7 +188,6 @@
                 <div class="fade-in-up">
                     <h2 class="text-4xl text-stone-800 text-center mb-12">Our Plantations</h2>
                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        <!-- Interactive hover cards for plants -->
                         <div class="group relative rounded-lg overflow-hidden"><img src="images/Mango.png" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Mangoes</h4></div></div>
                         <div class="group relative rounded-lg overflow-hidden"><img src="images/Banana.jpg" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Bananas</h4></div></div>
                         <div class="group relative rounded-lg overflow-hidden"><img src="images/Jackfruit.png" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center"><h4 class="text-white text-2xl font-bold">Jackfruit</h4></div></div>
@@ -210,9 +218,9 @@
                 </div>
                 <div class="fade-in-up">
                     <h2 class="text-4xl text-stone-800 text-center mb-12">Meet the Herd</h2>
-                    <div class="relative carousel-container">
+                    <div class="carousel-container">
                         <div class="carousel-track">
-                            <div class="carousel-slide text-center"><img src="images/Gauri.jpg"><h3 class="text-2xl mt-4">Gauri</h3><p>Rescued in 2021, now our gentle matriarch.</p></div>
+                            <div class="carousel-slide text-center"><img src="images/Gauri.jpg" class="mx-auto rounded-lg shadow-xl"><h3 class="text-2xl mt-4">Gauri</h3><p>Rescued in 2021, now our gentle matriarch.</p></div>
                             <div class="carousel-slide text-center"><img src="images/Krishna.jpg" class="mx-auto rounded-lg shadow-xl"><h3 class="text-2xl mt-4">Krishna</h3><p>A playful spirit who loves his daily porridge.</p></div>
                         </div>
                         <button class="carousel-prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/50 p-2 rounded-full">←</button>
@@ -239,11 +247,39 @@
                         <p class="text-stone-600 leading-relaxed text-lg" style="font-family: 'Playfair Display', serif;">This land brought us back to ourselves. After decades in the city, we yearned for a life connected to the soil and seasons. SuDhama is more than a farm; it's the culmination of a dream—a place to nurture, heal, and live in harmony with nature. We are grateful to share its peace with you. <br>- Sudha & Girish</p>
                     </div>
                     <div class="polaroid">
-                        <img src="https://images.unsplash.com/photo-1548282226-90535543c475?q=80&w=800&h=600&auto=format&fit=crop" alt="HappyFamily" class="w-full">
+                        <img src="images/HappyFamily.jpg" alt="A photo of Sudha and Girish at the farm" class="w-full">
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Location Section -->
+        <section id="location" class="page-section py-24 md:py-32 bg-white">
+            <div class="container mx-auto px-6 md:px-10">
+                <div class="text-center max-w-4xl mx-auto fade-in-up">
+                    <h1 class="text-5xl md:text-7xl text-stone-800 mb-6">Our Place on Earth</h1>
+                    <p class="text-lg text-stone-600">Find your way to our sanctuary of peace in Hebri, Udupi.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16 items-center fade-in-up">
+                    <div class="space-y-6">
+                        <h2 class="text-4xl text-stone-800">Visit Us</h2>
+                        <p class="text-stone-600 text-lg">
+                            <strong class="block">SuDhama</strong>
+                            8-118(1), Kanyana Village,<br>
+                            Near Peradi, Hebri Taluk,<br>
+                            Udupi District, Karnataka - 576112
+                        </p>
+                        <a href="https://www.google.com/maps/place/%E0%B2%B8%E0%B3%81%E0%B2%A7%E0%B2%BE%E0%B2%AE/@13.4247466,74.9705411,172m/data=!3m1!1e3!4m6!3m5!1s0x3bbb5f0028f20293:0x1f97240b6ea82aa0!8m2!3d13.424356!4d74.9707893!16s%2Fg%2F11xdm06wx3?entry=ttu" target="_blank" rel="noopener noreferrer" class="inline-block bg-green-700 text-white px-8 py-3 rounded-full hover:bg-green-800 transition-all">
+                            Get Directions on Google Maps
+                        </a>
+                    </div>
+                    <a href="https://www.google.com/maps/place/%E0%B2%B8%E0%B3%81%E0%B2%A7%E0%B2%BE%E0%B2%AE/@13.4247466,74.9705411,172m/data=!3m1!1e3!4m6!3m5!1s0x3bbb5f0028f20293:0x1f97240b6ea82aa0!8m2!3d13.424356!4d74.9707893!16s%2Fg%2F11xdm06wx3?entry=ttu" target="_blank" rel="noopener noreferrer" class="block rounded-lg overflow-hidden shadow-2xl group">
+                        <img src="https://i.imgur.com/8z6gY4k.png" alt="Satellite view map of SuDhama farm" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300">
+                    </a>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
@@ -253,17 +289,19 @@
                 <a href="#" data-page="home"><img src="images/Logo.png" alt="SuDhama Logo" class="h-16 w-auto"></a>
             </div>
             <p class="text-stone-400">A Good Home. A Good Life.</p>
-            <div class="mt-8 space-x-6 text-sm"><a href="#" class="hover:text-white transition" data-page="farmhouse">The Farmhouse</a><a href="#" class="hover:text-white transition" data-page="farm">Our Farm</a><a href="#" class="hover:text-white transition" data-page="cows">Our Cows</a><a href="#" class="hover:text-white transition" data-page="story">Our Story</a></div>
-            <div class="mt-12 max-w-md mx-auto fade-in-up">
-                <h4 class="text-lg font-semibold mb-2">Let nature write to you.</h4>
-                <form class="flex"><input type="email" placeholder="Your email address" class="w-full rounded-l-md p-3 text-black"><button type="submit" class="bg-amber-700 text-white px-6 rounded-r-md">Sign Up</button></form>
+            <div class="mt-8 space-x-6 text-sm">
+                <a href="#" class="hover:text-white transition" data-page="farmhouse">The Farmhouse</a>
+                <a href="#" class="hover:text-white transition" data-page="farm">Our Farm</a>
+                <a href="#" class="hover:text-white transition" data-page="cows">Our Cows</a>
+                <a href="#" class="hover:text-white transition" data-page="story">Our Story</a>
+                <a href="#" class="hover:text-white transition" data-page="location">Location</a>
             </div>
             <p class="text-xs text-stone-500 mt-12">&copy; 2025 SuDhama. All Rights Reserved.</p>
         </div>
     </footer>
 
     <!-- Lightbox for Dairy Teaser -->
-    <div id="dairy-lightbox" class="lightbox fixed inset-0 bg-black/70 z-50 items-center justify-center">
+    <div id="dairy-lightbox" class="lightbox fixed inset-0 bg-black/70 z-50 items-center justify-center p-4">
         <div class="bg-white p-8 rounded-lg text-center max-w-md relative">
             <button id="close-lightbox" class="absolute top-2 right-4 text-2xl">&times;</button>
             <h3 class="text-3xl font-bold mb-4">Coming Soon</h3>
@@ -289,29 +327,30 @@
         const menuCloseIcon = document.getElementById('menu-close-icon');
         const header = document.getElementById('header');
 
-        // Page Navigation
         const showPage = (pageId) => {
+            if (!pageId) return;
             pages.forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId)?.classList.add('active');
+            const targetPage = document.getElementById(pageId);
+            if(targetPage) {
+                targetPage.classList.add('active');
+                targetPage.querySelectorAll('.fade-in-up').forEach(el => el.classList.remove('visible'));
+                observeAnimatedElements(targetPage);
+            }
             navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === pageId));
             mobileMenu.classList.add('hidden');
             menuOpenIcon.classList.remove('hidden');
             menuCloseIcon.classList.add('hidden');
             document.body.style.overflow = '';
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            // Re-trigger animations
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                 targetPage.querySelectorAll('.fade-in-up').forEach(el => el.classList.remove('visible'));
-                 observeAnimatedElements(targetPage);
-            }
         };
-        pageLinks.forEach(link => link.addEventListener('click', (e) => {
-            e.preventDefault();
-            showPage(link.dataset.page);
-        }));
 
-        // Mobile Menu
+        pageLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage(link.dataset.page);
+            });
+        });
+
         mobileMenuButton.addEventListener('click', () => {
             const isHidden = mobileMenu.classList.toggle('hidden');
             menuOpenIcon.classList.toggle('hidden', !isHidden);
@@ -319,10 +358,8 @@
             document.body.style.overflow = isHidden ? '' : 'hidden';
         });
 
-        // Header Style
         window.addEventListener('scroll', () => header.classList.toggle('glassmorphism', window.scrollY > 20));
 
-        // Scroll Animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -334,18 +371,30 @@
         observeAnimatedElements(document.querySelector('.page-section.active'));
 
         // Cow Carousel
-        const track = document.querySelector('.carousel-track');
-        const slides = Array.from(track.children);
-        const nextButton = document.querySelector('.carousel-next');
-        const prevButton = document.querySelector('.carousel-prev');
-        const slideWidth = slides[0].getBoundingClientRect().width;
-        let currentIndex = 0;
-        const moveToSlide = (targetIndex) => {
-            track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
-            currentIndex = targetIndex;
-        };
-        nextButton.addEventListener('click', () => moveToSlide((currentIndex + 1) % slides.length));
-        prevButton.addEventListener('click', () => moveToSlide((currentIndex - 1 + slides.length) % slides.length));
+        const carousel = document.querySelector('.carousel-container');
+        if (carousel) {
+            const track = carousel.querySelector('.carousel-track');
+            const slides = Array.from(track.children);
+            const nextButton = carousel.querySelector('.carousel-next');
+            const prevButton = carousel.querySelector('.carousel-prev');
+            let slideWidth = slides.length > 0 ? slides[0].getBoundingClientRect().width : 0;
+            let currentIndex = 0;
+
+            const updateSlideWidth = () => {
+                slideWidth = slides.length > 0 ? slides[0].getBoundingClientRect().width : 0;
+                track.style.transform = 'translateX(-' + slideWidth * currentIndex + 'px)';
+            };
+
+            const moveToSlide = (targetIndex) => {
+                track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
+                currentIndex = targetIndex;
+            };
+
+            nextButton.addEventListener('click', () => moveToSlide((currentIndex + 1) % slides.length));
+            prevButton.addEventListener('click', () => moveToSlide((currentIndex - 1 + slides.length) % slides.length));
+            window.addEventListener('resize', updateSlideWidth);
+            updateSlideWidth();
+        }
         
         // Dairy Lightbox
         const dairyLightbox = document.getElementById('dairy-lightbox');
