@@ -12,7 +12,7 @@
     <style>
         :root {
             --bg-color: #FBF9F6; /* Coconut White */
-            --text-color: #3D3A37;
+            --text-color: #44403C; /* Softer Warm Grey */
             --accent-color: #C27D38; /* Terracotta */
             --green-color: #4A5745; /* Forest Green */
         }
@@ -27,32 +27,32 @@
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
+            text-wrap: balance;
         }
         .nav-link {
             position: relative;
-            transition: color 0.4s ease;
-            padding-bottom: 8px;
+            transition: all 0.4s ease;
+            padding: 8px 16px;
+            border-radius: 9999px; /* pill shape */
         }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--accent-color);
-            transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        .nav-link.active {
+            background-color: #F5EFE6; /* soft beige */
+            color: var(--green-color);
         }
-        .nav-link:hover::after, .nav-link.active::after {
-            width: 100%;
+        .nav-link:not(.active):hover {
+            background-color: rgba(74, 87, 69, 0.1); /* transparent green */
         }
         .hero-image {
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/Farmhouse.jpg');
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('images/Farmhouse.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             height: 100vh;
+            animation: slow-zoom 20s infinite alternate ease-in-out;
+        }
+        @keyframes slow-zoom {
+            from { background-size: 100% auto; }
+            to { background-size: 105% auto; }
         }
         .page-section { display: none; }
         .page-section.active { display: block; }
@@ -67,8 +67,8 @@
         }
         .glassmorphism {
             background: rgba(251, 249, 246, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
         /* Carousel styles */
@@ -79,17 +79,36 @@
         /* Lightbox styles */
         .lightbox { display: none; }
         .lightbox.active { display: flex; }
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background-color: var(--accent-color);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.1s linear;
+        }
+        #mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body class="antialiased">
+    <div id="progress-bar"></div>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 top-4 left-4 bg-white text-black p-4 rounded-lg">Skip to main content</a>
 
     <!-- Header & Navigation -->
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
         <nav class="container mx-auto px-6 md:px-10 py-3 flex justify-between items-center">
             <a href="#" class="block" data-page="home">
-                <img src="images/Logo.png" alt="SuDhama Logo" class="h-14 w-auto">
+                <img src="images/Logo.png" alt="SuDhama Logo" class="h-16 w-auto transition-all duration-500">
             </a>
-            <div class="hidden md:flex items-center space-x-10 text-sm font-medium tracking-wide">
+            <div class="hidden md:flex items-center space-x-2 text-sm font-medium tracking-wide">
                 <a href="#" class="nav-link active" data-page="home">Home</a>
                 <a href="#" class="nav-link" data-page="farmhouse">The Farmhouse</a>
                 <a href="#" class="nav-link" data-page="farm">Our Farm</a>
@@ -97,12 +116,15 @@
                 <a href="#" class="nav-link" data-page="story">Our Story</a>
                 <a href="#" class="nav-link" data-page="location">Location</a>
             </div>
+            <div class="hidden md:block">
+                <a href="#location" data-page="location" class="px-5 py-2 border border-green-800 text-green-800 rounded-full text-sm hover:bg-green-800 hover:text-white transition-colors">Book a Visit</a>
+            </div>
             <button id="mobile-menu-button" class="md:hidden text-stone-800 z-50">
                 <svg id="menu-open-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 <svg id="menu-close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-stone-100 flex flex-col items-center justify-center space-y-8 text-2xl">
+        <div id="mobile-menu" class="md:hidden fixed top-0 left-0 w-full h-screen bg-stone-100 flex flex-col items-center justify-center space-y-8 text-2xl">
             <a href="#" class="nav-link" data-page="home">Home</a>
             <a href="#" class="nav-link" data-page="farmhouse">The Farmhouse</a>
             <a href="#" class="nav-link" data-page="farm">Our Farm</a>
@@ -112,14 +134,17 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <!-- Homepage Section -->
         <section id="home" class="page-section active">
-            <div class="hero-image flex items-center justify-center text-center text-white">
-                <div class="fade-in-up px-4">
-                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4">SuDhama: The Good Home</h1>
-                    <p class="text-lg md:text-xl font-light max-w-3xl mx-auto tracking-wide">A sanctuary in the heart of Udupi, rooted in tradition, nature, and affection for the land.</p>
+            <div class="hero-image flex items-center justify-center text-center text-white relative">
+                <div class="fade-in-up px-4 z-10">
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.6);">SuDhama (सुधाम)</h1>
+                    <p class="text-lg md:text-xl font-light max-w-3xl mx-auto tracking-wide">In Sanskrit, a "Good Home" or a "Good Place." For us, it is a sanctuary in the heart of Udupi, dedicated to reclaiming the slow life, rooted in tradition, nature, and affection for the land.</p>
                     <a href="#home-features" class="mt-8 inline-block bg-white/20 backdrop-blur-sm border border-white/50 text-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all duration-300 ease-in-out text-lg">Explore SuDhama</a>
+                </div>
+                <div class="absolute bottom-10 animate-bounce">
+                    <svg class="w-8 h-8 text-white/80" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
                 </div>
             </div>
             <div id="home-features" class="py-24 md:py-32 bg-stone-100">
@@ -240,6 +265,17 @@
                     <div class="space-y-6">
                         <h2 class="text-3xl md:text-4xl text-stone-800">A Letter From Us</h2>
                         <p class="text-stone-600 leading-relaxed text-lg" style="font-family: 'Playfair Display', serif;">This land brought us back to ourselves. After decades in the city, we yearned for a life connected to the soil and seasons. SuDhama is more than a farm; it's the culmination of a dream—a place to nurture, heal, and live in harmony with nature. We are grateful to share its peace with you. <br>- Sudha & Girish</p>
+                    </div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img src="images/Founders.jpg" alt="Sudha & Girish" class="rounded-lg shadow-xl w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="fade-in-up">
+                    <h2 class="text-3xl md:text-4xl text-stone-800 text-center mb-12">Founder's Note</h2>
+                    <div class="max-w-4xl mx-auto bg-stone-50 p-10 rounded-lg shadow-inner">
+                        <p class="text-stone-600 leading-relaxed text-lg" style="font-family: 'Playfair Display', serif;">"The decision to leave our urban life behind was not an easy one, but it was a necessary one. We felt a calling to return to our roots, to cultivate a life of purpose and intention. SuDhama is our answer to that call. It is a testament to the power of nature to heal, inspire, and transform. We hope that our story will inspire others to follow their own dreams, no matter how daunting they may seem."</p>
+                        <p class="text-right mt-6 font-semibold">- Sudha & Girish</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -265,6 +301,31 @@
                         </a>
                     </div>
                     <a href="https://www.google.com/maps/place/%E0%B2%B8%E0%B3%81%E0%B2%A7%E0%B2%BE%E0%B2%AE/@13.4247466,74.9705411,172m/data=!3m1!1e3!4m6!3m5!1s0x3bbb5f0028f20293:0x1f97240b6ea82aa0!8m2!3d13.424356!4d74.9707893!16s%2Fg%2F11xdm06wx3?entry=ttu" target="_blank" rel="noopener noreferrer" class="block rounded-lg overflow-hidden shadow-2xl group">
+                        <img src="images/Map.png" alt="Map to SuDhama" class="w-full h-full object-cover">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-24 md:py-32 bg-stone-100">
+            <div class="container mx-auto px-6 md:px-10">
+                <div class="text-center max-w-4xl mx-auto fade-in-up">
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl text-stone-800 mb-6">Frequently Asked Questions</h1>
+                </div>
+                <div class="max-w-4xl mx-auto mt-16 space-y-8 fade-in-up">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Can I visit the farm?</h3>
+                        <p class="text-stone-600">Yes, we welcome visitors by appointment. Please contact us in advance to schedule your visit.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Is the milk from your cows for sale?</h3>
+                        <p class="text-stone-600">Currently, our milk is not for sale, but we are working on a small-batch, ethical dairy business. Stay tuned for updates!</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Are you certified organic?</h3>
+                        <p class="text-stone-600">We are "organic-certification ready," which means we follow all organic practices, but we have not yet completed the official certification process.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -295,7 +356,7 @@
             <p class="text-stone-600 mb-4">Our dream is to extend this love into a small, ethical dairy business, providing pure, small-batch milk from happy cows.</p>
         </div>
     </div>
-    
+
     <!-- Gallery Lightbox -->
     <div id="gallery-lightbox" class="lightbox fixed inset-0 bg-black/80 z-50 items-center justify-center p-4">
         <button id="close-gallery-lightbox" class="absolute top-4 right-6 text-white text-4xl">&times;</button>
@@ -312,6 +373,8 @@
         const menuOpenIcon = document.getElementById('menu-open-icon');
         const menuCloseIcon = document.getElementById('menu-close-icon');
         const header = document.getElementById('header');
+        const logo = document.querySelector('img[alt="SuDhama Logo"]');
+        const progressBar = document.getElementById('progress-bar');
 
         const showPage = (pageId) => {
             if (!pageId) return;
@@ -322,8 +385,11 @@
                 targetPage.querySelectorAll('.fade-in-up').forEach(el => el.classList.remove('visible'));
                 observeAnimatedElements(targetPage);
             }
-            navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === pageId));
-            mobileMenu.classList.add('hidden');
+            navLinks.forEach(l => {
+                const isActive = l.dataset.page === pageId;
+                l.classList.toggle('active', isActive);
+            });
+            mobileMenu.classList.remove('open');
             menuOpenIcon.classList.remove('hidden');
             menuCloseIcon.classList.add('hidden');
             document.body.style.overflow = '';
@@ -338,13 +404,27 @@
         });
 
         mobileMenuButton.addEventListener('click', () => {
-            const isHidden = mobileMenu.classList.toggle('hidden');
-            menuOpenIcon.classList.toggle('hidden', !isHidden);
-            menuCloseIcon.classList.toggle('hidden', isHidden);
-            document.body.style.overflow = isHidden ? '' : 'hidden';
+            mobileMenu.classList.toggle('open');
+            menuOpenIcon.classList.toggle('hidden');
+            menuCloseIcon.classList.toggle('hidden');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
         });
 
-        window.addEventListener('scroll', () => header.classList.toggle('glassmorphism', window.scrollY > 20));
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY > 20;
+            header.classList.toggle('glassmorphism', scrolled);
+            header.classList.toggle('shadow-sm', scrolled);
+            if (logo) {
+                logo.classList.toggle('h-12', scrolled);
+                logo.classList.toggle('h-16', !scrolled);
+            }
+
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.scrollY / totalHeight) * 100;
+            if (progressBar) {
+                progressBar.style.width = progress + '%';
+            }
+        });
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -418,10 +498,10 @@
                 nextButton.addEventListener('click', () => moveToSlide((currentIndex + 1) % slides.length));
                 prevButton.addEventListener('click', () => moveToSlide((currentIndex - 1 + slides.length) % slides.length));
             }
-            
+
             track.addEventListener('mousedown', handleDragStart);
             track.addEventListener('touchstart', handleDragStart);
-            
+
             document.addEventListener('mousemove', handleDragMove);
             document.addEventListener('touchmove', handleDragMove);
 
@@ -431,7 +511,7 @@
             window.addEventListener('resize', updateSlideWidth);
             updateSlideWidth();
         }
-        
+
         // Dairy Lightbox
         const dairyLightbox = document.getElementById('dairy-lightbox');
         const dairyButton = document.getElementById('dairy-teaser-button');
