@@ -1,9 +1,9 @@
 import React from 'react';
 import HeroSection from '../components/HeroSection';
 import FeatureCard from '../components/FeatureCard';
-import FarmhouseImage from '../assets/images/Farmhouse V1.jpg';
-import FarmImage from '../assets/images/Farm.jpg';
-import CowImage from '../assets/images/Cow.jpg';
+import FarmhouseImage from '../../images/Farmhouse V1.jpg';
+import FarmImage from '../../images/Farm.jpg';
+import CowImage from '../../images/Cow.jpg';
 
 const HomePage = () => {
   return (
