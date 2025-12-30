@@ -1,0 +1,316 @@
+:root {
+  --bg-color: #FBF9F6; /* Coconut White */
+  --text-color: #44403C; /* Softer Warm Grey */
+  --accent-color: #C27D38; /* Terracotta */
+  --green-color: #4A5745; /* Forest Green */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  background-image: url('https://www.transparenttextures.com/patterns/subtle-grain.png');
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+p {
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
+.drop-cap {
+  float: left;
+  font-size: 4rem;
+  line-height: 1;
+  margin: 0.1em 0.1em 0 0;
+  color: var(--accent-color);
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+.quote-style {
+  position: relative;
+  font-style: italic;
+  padding: 2rem;
+}
+
+.quote-style::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  font-size: 6rem;
+  color: rgba(194, 125, 56, 0.1);
+  font-family: 'Playfair Display', serif;
+  line-height: 1;
+}
+
+.handwriting-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.2rem;
+  color: var(--accent-color);
+}
+
+.nav-link {
+  position: relative;
+  transition: all 0.4s ease;
+  padding: 8px 16px;
+  border-radius: 9999px; /* pill shape */
+}
+
+.feature-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px) rotate(-1deg);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.plantation-grid-item {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.plantation-grid-item:hover {
+  transform: scale(1.05);
+}
+
+.plantation-grid-item .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  padding: 2rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.plantation-grid-item:hover .overlay {
+  transform: translateY(0);
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.carousel-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicator.active {
+  background-color: white;
+  transform: scale(1.2);
+}
+
+.focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.btn-press {
+  transition: transform 0.1s ease;
+}
+
+.btn-press:active {
+  transform: scale(0.95);
+}
+
+.nav-link.active {
+  background-color: #F5EFE6; /* soft beige */
+  color: var(--green-color);
+  font-weight: 600;
+}
+
+.nav-link:not(.active):hover {
+  background-color: rgba(74, 87, 69, 0.1); /* transparent green */
+  color: var(--green-color);
+}
+
+.hero-image {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('images/Farmhouse.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+  animation: slow-zoom 20s infinite alternate ease-in-out;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+.hero-text-parallax {
+  transform: translateY(0);
+  transition: transform 0.1s ease-out;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-10px); }
+  60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+@keyframes slow-zoom {
+  from { background-size: 100% auto; }
+  to { background-size: 105% auto; }
+}
+
+.page-section { display: none; }
+
+.page-section.active { display: block; }
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1.2s cubic-bezier(0.165, 0.84, 0.44, 1), transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.glassmorphism {
+  background: rgba(251, 249, 246, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+/* Carousel styles */
+.carousel-container { overflow: hidden; position: relative; }
+
+.carousel-track { display: flex; transition: transform 0.5s ease-in-out; cursor: grab; }
+
+.carousel-track:active { cursor: grabbing; }
+
+.carousel-slide { flex: 0 0 100%; box-sizing: border-box; padding: 0 1rem; }
+
+/* Lightbox styles */
+.lightbox { display: none; }
+
+.lightbox.active { display: flex; }
+
+#mobile-menu {
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#mobile-menu.open {
+  transform: translateX(0);
+}
+
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background-color: var(--accent-color);
+  width: 0%;
+  z-index: 100;
+  transition: width 0.1s linear;
+}
+
+.nav-link {
+  min-height: 44px; /* Touch target size */
+  padding: 12px 16px; /* Increased padding for mobile */
+}
+
+.mobile-nav-link {
+  padding: 16px 24px; /* Larger touch targets in mobile menu */
+  font-size: 1.25rem;
+}
+
+.hero-text-parallax h1 {
+  font-size: clamp(2rem, 8vw, 4rem);
+}
+
+.hero-text-parallax p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+@media (max-width: 640px) {
+  .feature-card {
+    transform: none !important; /* Disable complex transforms on mobile */
+  }
+  .feature-card:hover {
+    transform: none !important;
+  }
+  .plantation-grid-item {
+    flex: 0 0 80%;
+  }
+}
+
+.mobile-cta-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--accent-color);
+  color: white;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.mobile-cta-button:hover {
+  transform: scale(1.1);
+  background-color: #a05a3b;
+}
+
+@media (max-width: 768px) {
+  .mobile-cta-button {
+    display: flex;
+  }
+  .plantation-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1rem;
+  }
+  .plantation-grid-item {
+    flex: 0 0 70%;
+    scroll-snap-align: start;
+    margin-right: 1rem;
+  }
+  .plantation-grid-item:last-child {
+    margin-right: 0;
+  }
+}
