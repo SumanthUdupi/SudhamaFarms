@@ -32,6 +32,9 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          publish_branch: gh-pages
+          enable_jekyll: false
+          force_orphan: true
 
       - name: Validate deployment
         run: |
@@ -49,7 +52,6 @@ jobs:
         if: failure()
         run: |
           echo "Deployment failed. Rolling back..."
-          git checkout gh-pages
-          git reset --hard HEAD~1
-          git push origin gh-pages --force
-          echo "Rollback completed"
+          # Note: Rollback requires manual intervention since we're using force_orphan
+          echo "Please manually check the gh-pages branch and redeploy if needed"
+          echo "Rollback guidance provided"
